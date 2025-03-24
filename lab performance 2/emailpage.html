@@ -72,9 +72,29 @@
         return;
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailInput)) {
-        errorElement.textContent = "Must be a valid email address (e.g., anything@example.com).";
+      
+      const atIndex = emailInput.indexOf("@");
+      const dotIndex = emailInput.lastIndexOf(".");
+
+      
+      if (atIndex <= 0 || atIndex === emailInput.length - 1) {
+        errorElement.textContent = "Invalid email: '@' is missing or in the wrong place.";
+        return;
+      }
+
+      
+      if (dotIndex <= atIndex + 1 || dotIndex === emailInput.length - 1) {
+        errorElement.textContent = "Invalid email: '.' is missing or in the wrong place.";
+        return;
+      }
+
+     
+      const username = emailInput.substring(0, atIndex);
+      const domain = emailInput.substring(atIndex + 1, dotIndex);
+      const extension = emailInput.substring(dotIndex + 1);
+
+      if (!username || !domain || !extension) {
+        errorElement.textContent = "Invalid email: Missing parts of the address.";
         return;
       }
 
