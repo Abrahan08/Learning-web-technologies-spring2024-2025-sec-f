@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Validation Form</title>
+</head>
+<body>
+  <h2>Email</h2>
+  <form id="emailForm">
+    <label for="email">Email: </label>
+    <input type="text" id="email" name="email" />
+    <span 
+      id="infoIcon" 
+      style="cursor: pointer; border: 1px solid black; padding: 2px; display: inline-block; text-align: center; width: 15px; height: 15px; font-size: 12px;"
+    >
+      i
+    </span>
+    <br />
+    <button type="submit">Submit</button>
+    <div id="error" style="color: red;"></div>
+  </form>
+
+  
+  <div id="tooltip" style="
+    position: absolute;
+    display: none;
+    background-color: #f9f9f9;
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 12px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  ">
+    Hint: sample@example.com
+  </div>
+
+  <script>
+    const infoIcon = document.getElementById("infoIcon");
+    const tooltip = document.getElementById("tooltip");
+
+    
+    infoIcon.addEventListener("mouseenter", function (event) {
+      tooltip.style.display = "block";
+      tooltip.style.left = event.pageX + "px";
+      tooltip.style.top = event.pageY + "px";
+    });
+
+    
+    infoIcon.addEventListener("mousemove", function (event) {
+      tooltip.style.left = event.pageX + "px";
+      tooltip.style.top = event.pageY + 15 + "px"; 
+    });
+
+    
+    infoIcon.addEventListener("mouseleave", function () {
+      tooltip.style.display = "none";
+    });
+
+    
+    document.getElementById("emailForm").addEventListener("submit", function (event) {
+      event.preventDefault(); 
+
+      const emailInput = document.getElementById("email").value;
+      const errorElement = document.getElementById("error");
+
+      
+      errorElement.textContent = "";
+
+      
+      if (emailInput.trim() === "") {
+        errorElement.textContent = "Email cannot be empty.";
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput)) {
+        errorElement.textContent = "Must be a valid email address (e.g., anything@example.com).";
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    });
+  </script>
+</body>
+</html>
