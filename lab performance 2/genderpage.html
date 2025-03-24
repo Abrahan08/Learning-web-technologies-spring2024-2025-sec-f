@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Validation Form</title>
+    <script>
+        function validateGenderSelection(event) {
+            const genderOptions = document.getElementsByName('gender');
+            let isSelected = false;
+
+            
+            for (const option of genderOptions) {
+                if (option.checked) {
+                    isSelected = true;
+                    break;
+                }
+            }
+
+            const errorDiv = document.getElementById('error');
+            if (!isSelected) {
+                event.preventDefault();
+                errorDiv.textContent = "Please select a gender option.";
+            } else {
+                errorDiv.textContent = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Validation Form</h1>
+    <form onsubmit="validateGenderSelection(event)">
+        <fieldset>
+            <legend>Gender</legend>
+            <label>
+                <input type="radio" name="gender" value="male"> Male
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="gender" value="female"> Female
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="gender" value="other"> Other
+            </label>
+        </fieldset>
+        <br>
+        <div id="error" style="color: red;"></div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
