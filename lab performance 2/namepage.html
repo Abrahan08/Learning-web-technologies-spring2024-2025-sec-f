@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validation</title>
+    <style>
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Name</h2>
+    <form id="nameForm">
+        <input type="text" id="name" name="name">
+        <button type="submit">Submit</button>
+        <p id="error" class="error"></p>
+    </form>
+
+    <script>
+        document.getElementById('nameForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('name').value.trim();
+            const errorElement = document.getElementById('error');
+            
+            // Validation Rules
+            if (nameInput === '') {
+                errorElement.textContent = "Name cannot be empty.";
+                return;
+            }
+            
+            if (!/^([a-zA-Z]+[a-zA-Z.-]*\s+[a-zA-Z.-]+)$/.test(nameInput)) {
+                errorElement.textContent = "Name must contain at least two words and start with a letter.";
+                return;
+            }
+            
+            errorElement.textContent = ""; // Clear error if valid
+            alert("Form submitted successfully!");
+        });
+    </script>
+</body>
+</html>
