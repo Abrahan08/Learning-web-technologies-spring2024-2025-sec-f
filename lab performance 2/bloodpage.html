@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Group Validation Form</title>
+    <script>
+        function validateBloodGroup(event) {
+            const bloodGroup = document.getElementById('bloodGroup').value;
+            const errorDiv = document.getElementById('error');
+
+            
+            if (bloodGroup === "") {
+                event.preventDefault();
+                errorDiv.textContent = "Please select a blood group.";
+            } else {
+                errorDiv.textContent = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Blood Group Validation Form</h1>
+    <form onsubmit="validateBloodGroup(event)">
+        <table>
+            <tr>
+                <td><label for="bloodGroup">Blood Group:</label></td>
+                <td>
+                    <select id="bloodGroup" name="bloodGroup">
+                        <option value="">--Select--</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div id="error" style="color: red;"></div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
