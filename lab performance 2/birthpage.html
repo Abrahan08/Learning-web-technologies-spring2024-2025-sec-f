@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date of Birth Validation Form</title>
+    <script>
+        function validateDOB(event) {
+            const dayInput = document.getElementById('dd').value.trim();
+            const monthInput = document.getElementById('mm').value.trim();
+            const yearInput = document.getElementById('yyyy').value.trim();
+            const errorDiv = document.getElementById('error');
+            let errorMessage = "";
+
+            // Rule i: Cannot be empty
+            if (dayInput === "" || monthInput === "" || yearInput === "") {
+                errorMessage = "All fields (dd, mm, yyyy) must be filled.";
+            } 
+            // Rule ii: Must be valid numbers
+            else {
+                const day = Number(dayInput);
+                const month = Number(monthInput);
+                const year = Number(yearInput);
+
+                if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                    errorMessage = "All fields must contain valid numbers.";
+                } 
+                else if (day < 1 || day > 31) {
+                    errorMessage = "Day (dd) must be between 1 and 31.";
+                } 
+                else if (month < 1 || month > 12) {
+                    errorMessage = "Month (mm) must be between 1 and 12.";
+                } 
+                else if (year < 1900 || year > 2016) {
+                    errorMessage = "Year (yyyy) must be between 1900 and 2016.";
+                }
+            }
+
+            // Display error message or submit
+            if (errorMessage !== "") {
+                event.preventDefault();
+                errorDiv.textContent = errorMessage;
+            } else {
+                errorDiv.textContent = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Date of Birth Validation Form</h1>
+    <form onsubmit="validateDOB(event)">
+        <table border="0">
+            <tr>
+                <td><label for="dd">dd:</label></td>
+                <td><label></label></td>
+                <td><label for="mm">mm:</label></td>
+                <td><label></label></td>
+                <td><label for="yyyy">yyyy:</label></td>
+                
+            </tr>
+            <tr>
+                
+                <td><input type="text" id="dd" name="dd" ></td>
+                <td><label>/</label></td>
+                <td><input type="text" id="mm" name="mm" ></td>
+                <td><label>/</label></td>
+                <td><input type="text" id="yyyy" name="yyyy" ></td>
+            </tr>
+           
+        </table>
+        <br>
+        <div id="error" style="color: red;"></div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
