@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree Validation Form</title>
+    <script>
+        function validateDegree(event) {
+            const degreeOptions = document.getElementsByName('degree');
+            let isSelected = false;
+
+            // Check if at least one checkbox is selected
+            for (const option of degreeOptions) {
+                if (option.checked) {
+                    isSelected = true;
+                    break;
+                }
+            }
+
+            const errorDiv = document.getElementById('error');
+            if (!isSelected) {
+                event.preventDefault();
+                errorDiv.textContent = "Please select at least one degree.";
+            } else {
+                errorDiv.textContent = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Validation Form</h1>
+    <form onsubmit="validateDegree(event)">
+        <fieldset>
+            <legend>Degree</legend>
+            <table>
+                <tr>
+                    <td><input type="checkbox" name="degree" value="SSC"></td>
+                    <td>SSC</td>
+                    <td><input type="checkbox" name="degree" value="HSC"></td>
+                    <td>HSC</td>
+                    <td><input type="checkbox" name="degree" value="BSc"></td>
+                    <td>BSc</td>
+                </tr>
+               
+            </table>
+        </fieldset>
+        <br>
+        <div id="error" style="color: red;"></div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
